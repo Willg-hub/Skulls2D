@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/Free/Main Characters/Pink Man/Idleleft (32x32).png" type="Texture" id=1]
+[ext_resource path="res://script/npc.gd" type="Script" id=2]
+[ext_resource path="res://assets/NinjaAdventure/HUD/Dialog/DialogInfo.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8.5, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 31, 10 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "questmark"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="npc_principal" type="StaticBody2D"]
+scale = Vector2( 0.9, 0.9 )
+script = ExtResource( 2 )
+dialog_text_ing = [ "English: Another one who ended up here...", "English: You must have many doubts, but even I don't know how you ended up here.", "English: Well, I know you want to get out of here, the only way is to defeat the monster that lives in the temple.", "English: First I recommend you defeat the skeletons that live at the top", "English: After you defeat them, come back here and I'll give you a life bonus." ]
+dialog_text = [ "Português: Outro que veio parar aqui... ", "Português:  Você deve estar com muitas duvidas, mas nem eu sei como vocês vem parar aqui.", "Português: Bem, eu sei que você quer sair daqui, a unica maneira é derrotando monstro que vive no templo", "Português: Primeiro eu recomendo que você derrote os esqueletos que vivem na parte de cima ", "Português: Depois que você derrotar eles volte aqui e te darei um bônus de vida." ]
+especial_text = [ "Português: Pronto, agora você consegue aguentar umas porradas a mais.", "Português: Te desejo boa sorte, os seus antecessores não conseguiram derrotar o monstro" ]
+especial_texting = [ "English: Okay, now you can take a few more hits.", "English: I wish you luck, your predecessors were unable to defeat the monster" ]
+
+[node name="texture" type="Sprite" parent="."]
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 1 )
+hframes = 11
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 1 )
+anims/idle = SubResource( 4 )
+
+[node name="colision" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 3 )
+shape = SubResource( 3 )
+
+[node name="areainteração" type="Area2D" parent="."]
+
+[node name="colision" type="CollisionShape2D" parent="areainteração"]
+shape = SubResource( 5 )
+
+[node name="questmarcacao" type="Sprite" parent="."]
+position = Vector2( 0, -18 )
+scale = Vector2( 0.9, 0.9 )
+z_index = 1
+texture = ExtResource( 3 )
+hframes = 4
+
+[node name="anim" type="AnimationPlayer" parent="questmarcacao"]
+autoplay = "questmark"
+anims/RESET = SubResource( 6 )
+anims/questmark = SubResource( 7 )
+
+[connection signal="body_entered" from="areainteração" to="." method="on_body_entered"]
+[connection signal="body_exited" from="areainteração" to="." method="on_body_exited"]

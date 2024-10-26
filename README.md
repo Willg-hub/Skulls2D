@@ -1,6 +1,7 @@
-Game mobile desenvolvido para um projeto de faculdade da matéria de desenvolvimento mobile no terceiro semestre da faculdade
+Game mobile desenvolvido para um projeto de faculdade da matéria de desenvolvimento mobile no terceiro semestre da faculdade.
+O jogo se encontra disponível no site da faculdade no portal do curso de ADS: https://fmpsc.edu.br/course/ads/
 ---------------------------------
 Desenvolvimento:
-- Jogo desenvolvido utilizando a Godot engine que é um engine de criação de jogos
-- A linguagem utilizada foi a GDscript que é uma linguagem nativa da própria engine
-- Foi utilizado também os SDKs do android studio para gerar o APK
+- Jogo desenvolvido utilizando a Godot engine.
+- A linguagem utilizada foi a GDscript que é uma linguagem nativa da própria engine.
+- Foi utilizado também os SDKs do android studio para gerar o APK.
